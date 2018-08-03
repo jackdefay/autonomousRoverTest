@@ -8,7 +8,7 @@ Adafruit_MCP4725 dac;
 void setup() {
     pinMode(A0, OUTPUT);
 
-    dac.begin(0x62);  
+    dac.begin(0x62);   
 }
 
 void loop() {
