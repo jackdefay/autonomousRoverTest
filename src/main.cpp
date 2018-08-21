@@ -1,27 +1,26 @@
 #include <Arduino.h>
 
+//libraries for external DAC
 #include <Wire.h>
 #include <Adafruit_MCP4725.h>
 
-Adafruit_MCP4725 dac;
+Adafruit_MCP4725 dac;  //initialize DAC
 
 void setup() {
+    //set pins
     pinMode(A0, OUTPUT);
-
-    dac.begin(0x62);   
+    dac.begin(0x62);
 }
 
 void loop() {
-    //ramps up speed
+    //cycles through range of motion and speed
     for(int i = 175; i>60; i--){
       analogWrite(A0, i);
       dac.setVoltage(i*20, false);
       delay(20);
     }
 
-    // analogWrite(A0, 100);  //top speed
-    // analogWrite(10, 160);  //a half turn to the left to form a circle
-
+    //centers and stops the wheels
     analogWrite(A0, 175);
     dac.setVoltage(2047, false);
     delay(1000);
